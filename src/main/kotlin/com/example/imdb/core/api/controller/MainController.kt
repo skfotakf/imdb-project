@@ -21,11 +21,10 @@ class MainController(
     }
 
     @GetMapping("/top")
-    fun chart(): ModelAndView {
+    fun chart(model: Model): String {
 
-        val mav = ModelAndView("chart/top")
-        mav.addObject("chartAllTop",movieService.getChartAll())
-        return mav
+        model.addAttribute("chartAllTop",movieService.getChartAll())
+        return "chart/top"
 
     }
 
