@@ -1,5 +1,6 @@
 package com.example.imdb.core.domain
 
+import com.example.imdb.common.BaseTimeEntity
 import jakarta.persistence.*
 
 @Entity
@@ -27,9 +28,7 @@ class MovieEntity(
         @Column
         var heartCnt: Int? = 0
 
-){
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0L
+):BaseTimeEntity(){
+
 
 }
