@@ -1,0 +1,17 @@
+
+spring:
+  profiles:
+    active: dev
+  datasource:
+    url: jdbc:mysql://localhost:3308/imdb?useSSL=false&serverTimezone=UTC
+    username: root
+    password: 1234
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+    hibernate:
+      ddl-auto: update
+
+server:
+  port: 8082
