@@ -1,25 +1,25 @@
-
 <!DOCTYPE html>
-<html lang="ko">
+
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>IMDb 회원가입</title>
     <link rel="stylesheet" href="/css/auth/signup.css">
-    <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <script src="/js/jquery-3.6.1.min.js"></script>
 
 </head>
 <body>
-<form id="signup-form">
+<form id="signup-form" action="./signup" method="post">
     <div id="logo_box">
         <h1 class="logo"><a href="/chart/top" style="color:black">IMDb</a></h1>
     </div>
     <div id="inner_box">
         <h1>Create account</h1>
         <div>
-            <label>ID</label>
-            <input type="text" name="username" class="item_ip">
+            <label>Email</label>
+            <input type="text" name="email" class="item_ip">
         </div>
         <div class="item_msg">
             <span class="errorMsg"></span>
@@ -39,15 +39,8 @@
             <span class="errorMsg"></span>
         </div>
         <div>
-            <label>Email</label>
-            <input type="text" name="email" class="item_ip">
-        </div>
-        <div class="item_msg">
-            <span class="errorMsg"></span>
-        </div>
-        <div>
-            <label>Your name</label>
-            <input type="text" name="name" class="item_ip">
+            <label>Nickname</label>
+            <input type="text" name="nickname" class="item_ip">
         </div>
         <div class="item_msg">
             <span class="errorMsg"></span>
@@ -59,12 +52,139 @@
         <div class="item_msg">
             <span class="errorMsg"></span>
         </div>
+        <div>
+            <label>Your role</label>
+            <input type="text" name="role" class="item_ip" value="user" readonly>
+        </div>
 
-        <button type="button" id="signup-btn" class="btn_g">IMDb 계정 만들기</button>
+
+        <button id="signup-btn">IMDb 계정 만들기</button>
 
         <div id="inner_footer">계정을 가지고 계신가요?<a href="/auth/signin">로그인</a></div>
+
     </div>
 </form>
+<!--
+<script rel="script" type="text/javascript" >
+    const item_ip = document.querySelectorAll('.item_ip');
+    const errorMsg = document.querySelectorAll('.errorMsg');
+
+    const idCheck = /^[a-z]+[a-z0-9]{5,19}$/;
+    const passwordCheck = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
+    const emailCheck = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+    const nameCheck = /[ㄱ-힣]{2,10}/;
+    const phoneCheck = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+
+    let msgText = null;
+
+
+    function messageService(i, msgText, msgFlag) {
+        clearMsgNode(errorMsg[i]);
+        let msgTextNode = document.createTextNode(msgText);
+
+        if (msgFlag == 0) {
+            errorMsg[i].appendChild(msgTextNode);
+            errorMsg[i].style.display = 'block';
+        }
+    }
+
+    function clearMsgNode(msg) {
+
+        while (msg.hasChildNodes()) {
+            msg.removeChild(msg.firstChild);
+        }
+        msg.style.display = 'none';
+    }
+
+
+
+
+
+    const signupBtn = document.querySelector('#signup-btn');
+    const signupForm = document.querySelector('#signup-form');
+    signupBtn.onclick = () => {
+
+        let formData = new FormData(signupForm);
+        let signupObj = {
+            email: formData.get('email'),
+            password: formData.get('password'),
+            nickname: formData.get('nickname'),
+            telephone: formData.get('telephone'),
+            role: 'USER'
+        }
+
+        $.ajax({
+            type: "post",
+            url: "/auth/signup",
+            data: signupObj,
+            headers : {
+                "Content-Type" : "application/json",
+                "X-HTTP-Method-Override" : "POST"
+            },
+            dataType: "json",
+            success: function(data) {
+
+                alert("twt");
+                let respObj = JSON.parse(data);
+                if (respObj.code == 400) {
+                    for (let i = 0; i < item_ip.length; i++) {
+                        clearMsgNode(errorMsg[i]);
+                        if (item_ip[i].value.length == 0) {
+                            msgText = '필수항목입니다.';
+                            messageService(i, msgText, 0);
+                        } else if (item_ip[i].value.length != 0) {
+                            if (!idCheck.test(item_ip[0].value)) {
+                                msgText = '아이디는 영문자로 시작하는 6~20자 영문자 또는 숫자이어야 합니다.';
+                                messageService(0, msgText, 0);
+                            }
+                            if (!passwordCheck.test(item_ip[1].value)) {
+                                msgText = '비밀번호를 8 ~ 16자 영문, 숫자 조합으로 하세요';
+                                messageService(1, msgText, 0);
+                            }
+                            if (item_ip[1].value != item_ip[2].value) {
+                                msgText = '비밀번호가 일치하지 않습니다.';
+                                messageService(2, msgText, 0);
+                            }
+                            if (!emailCheck.test(item_ip[3].value)) {
+                                msgText = '이메일을 다시 입력해주세요';
+                                messageService(3, msgText, 0);
+                            }
+                            if (!nameCheck.test(item_ip[4].value)) {
+                                msgText = '이름을 다시 입력해주세요';
+                                messageService(4, msgText, 0);
+                            }
+                            if (!phoneCheck.test(item_ip[5].value)) {
+                                msgText = '전화번호를 다시 입력해주세요';
+                                messageService(5, msgText, 0);
+                            }
+                        }
+                    }
+                } else if (respObj.code == 410 || respObj.code == 500) {
+                    for (let i = 0; i < item_ip.length; i++) {
+                        clearMsgNode(errorMsg[i]);
+                    }
+                    alert(respObj.msg);
+                    msgText = '이미 가입된 아이디 입니다.'
+                    messageService(0,msgText,0);
+                } else {
+                    alert("text");
+                    location.href = '/chart/top';
+                }
+            },
+            error: function(request, status, error) {
+                let respObj = JSON.parse(request);
+                alert(respObj.role);
+            }
+        }) // end ajax
+
+    }//end onclick
+
+
+
+
+
+</script>
+-->
 </body>
-<script src="/js/signup.js"></script>
+
 </html>

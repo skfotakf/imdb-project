@@ -1,18 +1,16 @@
 package com.example.imdb.core.api.controller
 
-import com.example.imdb.core.service.movieService
+import com.example.imdb.core.service.MovieService
 import org.springframework.stereotype.Controller
 import org.springframework.ui.Model
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
-import org.springframework.web.servlet.ModelAndView
 
 
 @Controller
 @RequestMapping("/chart")
 class MainController(
-        private val movieService: movieService
+        private val movieService: MovieService
 
 ) {
     @GetMapping("/")

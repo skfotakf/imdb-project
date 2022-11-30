@@ -1,15 +1,13 @@
 const item_ip = document.querySelectorAll('.item_ip');
 const errorMsg = document.querySelectorAll('.errorMsg');
 
-var idCheck = /^[a-z]+[a-z0-9]{5,19}$/;
-var passwordCheck = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
-var emailCheck = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-var nameCheck = /[ㄱ-힣]{2,10}/;
-var phoneCheck = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
+const idCheck = /^[a-z]+[a-z0-9]{5,19}$/;
+const passwordCheck = /^(?=.*\d)(?=.*[a-zA-Z])[0-9a-zA-Z]{8,16}$/;
+const emailCheck = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+const nameCheck = /[ㄱ-힣]{2,10}/;
+const phoneCheck = /^01([0|1|6|7|8|9])-?([0-9]{3,4})-?([0-9]{4})$/;
 
-var msgText = null;
-
-
+let msgText = null;
 
 
 function messageService(i, msgText, msgFlag) {
@@ -37,21 +35,28 @@ function clearMsgNode(msg) {
 const signupBtn = document.querySelector('#signup-btn');
 const signupForm = document.querySelector('#signup-form');
 signupBtn.onclick = () => {
+
 	let formData = new FormData(signupForm);
 	let signupObj = {
-		username: formData.get('username'),
-		password: formData.get('password'),
 		email: formData.get('email'),
-		name: formData.get('name'),
+		password: formData.get('password'),
+		nickname: formData.get('nickname'),
 		telephone: formData.get('telephone'),
-		role: 'ROLE_USER'
+		role: 'USER'
 	}
+
 	$.ajax({
 		type: "post",
 		url: "/auth/signup",
 		data: signupObj,
+        headers : {
+            "Content-Type" : "application/json",
+            "X-HTTP-Method-Override" : "POST"
+        },
 		dataType: "text",
 		success: function(data) {
+
+			alert("twt");
 			let respObj = JSON.parse(data);
 			if (respObj.code == 400) {
 				for (let i = 0; i < item_ip.length; i++) {
@@ -94,18 +99,16 @@ signupBtn.onclick = () => {
 				msgText = '이미 가입된 아이디 입니다.'
 				messageService(0,msgText,0);
 			} else {
-				alert(respObj.msg);
-				location.href = '/auth/signin';
+				alert("text");
+				location.href = '/chart/top';
 			}
 		},
 		error: function() {
-			alert("전송 오류");
+			alert("te1");
 		}
 	}) // end ajax
-} // end onclick
 
-
-
+}//end onclick
 
 
 
