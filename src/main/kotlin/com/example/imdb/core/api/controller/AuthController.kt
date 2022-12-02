@@ -1,5 +1,6 @@
 package com.example.imdb.core.api.controller
 
+import com.example.imdb.core.api.request.LoginRequest
 import com.example.imdb.core.api.request.SignupRequest
 import com.example.imdb.core.service.AuthService
 import com.example.imdb.core.service.AuthToken
@@ -39,6 +40,13 @@ class AuthController(
         authService.signup(signupRequest)
         return "redirect:/chart/top"
     }
+
+    @GetMapping("/login")
+    fun login(model: Model) : String{
+        model.addAttribute("loginRequest", LoginRequest("",""))
+        return "auth/login"
+    }
+
 
 
 }
