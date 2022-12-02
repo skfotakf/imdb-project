@@ -26,9 +26,9 @@ class UserEntity(
 ) : BaseTimeEntity() {
 
     companion object {
-        fun of(signupRequest: SignupRequest): UserEntity {
+        fun of(signupRequest: SignupRequest, encodedPassword: String): UserEntity {
             signupRequest.run {
-                return UserEntity(email, password, nickname, telephone, role)
+                return UserEntity(email, encodedPassword, nickname, telephone, role)
             }
         }
     }
