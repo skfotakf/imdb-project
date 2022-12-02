@@ -13,7 +13,8 @@ class AuthService(
 
     fun signup(signupRequest: SignupRequest) : AuthToken?{
         userRepository.save(UserEntity.of(signupRequest))
-        return authTokenService.generateTokenByEmail(signupRequest.email!!)
+        return authTokenService.generateTokenByEmail(signupRequest.email)
+
     }
 
 }

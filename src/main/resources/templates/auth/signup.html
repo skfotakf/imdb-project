@@ -9,9 +9,11 @@
     <link rel="stylesheet" href="/css/auth/signup.css">
     <script src="/js/jquery-3.6.1.min.js"></script>
 
+
+
 </head>
 <body>
-<form id="signup-form" action="./signup" method="post">
+<form id="signup-form" th:action="@{/auth/signup}" th:object="${signupRequest}" method="post">
     <div id="logo_box">
         <h1 class="logo"><a href="/chart/top" style="color:black">IMDb</a></h1>
     </div>
@@ -19,42 +21,42 @@
         <h1>Create account</h1>
         <div>
             <label>Email</label>
-            <input type="text" name="email" class="item_ip">
+            <input type="text" class="item_ip" th:field="*{email}">
         </div>
         <div class="item_msg">
-            <span class="errorMsg"></span>
+            <span th:if="${#fields.hasErrors()}" th:errors="*{email}">그렇다</span>
         </div>
         <div>
             <label>Password</label>
-            <input type="password" name="password" class="item_ip">
+            <input type="password" class="item_ip" th:field="*{password}">
         </div>
         <div class="item_msg">
-            <span class="errorMsg"></span>
+            <span th:if="${#fields.hasErrors()}" th:errors="*{password}"></span>
         </div>
         <div>
             <label>Re-enter password</label>
-            <input type="password" name="repassword" class="item_ip">
+            <input type="password" class="item_ip" name="repassword">
         </div>
         <div class="item_msg">
-            <span class="errorMsg"></span>
+            <span th:if="${#fields.hasErrors('repassword')}" th:errors="*{repassword}"></span>
         </div>
         <div>
             <label>Nickname</label>
-            <input type="text" name="nickname" class="item_ip">
+            <input type="text" class="item_ip" th:field="*{nickname}">
         </div>
         <div class="item_msg">
-            <span class="errorMsg"></span>
+            <span th:if="${#fields.hasErrors()}"  th:errors="*{nickname}"></span>
         </div>
         <div>
             <label>Your telephone (without "-")</label>
-            <input type="tel" name="telephone" class="item_ip">
+            <input type="tel" class="item_ip" th:field="*{telephone}">
         </div>
         <div class="item_msg">
-            <span class="errorMsg"></span>
+            <span th:if="${#fields.hasErrors()}"  th:errors="*{telephone}"></span>
         </div>
         <div>
             <label>Your role</label>
-            <input type="text" name="role" class="item_ip" value="user" readonly>
+            <input type="text"  th:name="role" class="item_ip" th:value="user"  readonly>
         </div>
 
 

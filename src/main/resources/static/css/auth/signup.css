@@ -65,12 +65,10 @@ a:hover{
 }
 .item_msg {
 	font-size: 12px;
-	color: red;
+    border-color: #dc3545;
+    color: #dc3545;
 }
 
-.item_msg .errorMsg {
-	display: none;
-}
 
 #inner_box button{
     width: 100%;

@@ -9,6 +9,10 @@ import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import jakarta.validation.Valid
+import org.springframework.ui.Model
+import org.springframework.validation.BindingResult
+import org.springframework.web.bind.annotation.ModelAttribute
+import org.springframework.web.servlet.ModelAndView
 
 
 @Controller
@@ -18,13 +22,22 @@ class AuthController(
 ) {
 
     @GetMapping("/signup")
-    fun signupForm(): String {
+    fun signupForm(model: Model): String {
+        model.addAttribute("signupRequest", SignupRequest("","","","","","role"))
         return "auth/signup"
     }
     @PostMapping("/signup")
-    fun signup(@Valid signupRequest: SignupRequest) : AuthToken? {
+    fun signup(@Valid signupRequest: SignupRequest, bindingResult: BindingResult) : String? {
 
-        return authService.signup(signupRequest)
+        if(signupRequest.password != signupRequest.repassword){
+            bindingResult.rejectValue("repassword", "key","비밀번호가 일치하지 않습니다")
+        }
+        if(bindingResult.hasErrors()){
+
+            return "auth/signup"
+        }
+        authService.signup(signupRequest)
+        return "redirect:/chart/top"
     }
 
 
