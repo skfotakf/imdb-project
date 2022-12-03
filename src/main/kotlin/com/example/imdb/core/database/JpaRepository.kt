@@ -10,4 +10,5 @@ interface MovieRepository : JpaRepository<MovieEntity, Long> {
 
 interface UserRepository: JpaRepository<UserEntity, Long>{
 
+    fun findByEmail(email: String) : UserEntity?
 }

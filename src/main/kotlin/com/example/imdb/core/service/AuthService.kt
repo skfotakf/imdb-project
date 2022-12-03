@@ -1,10 +1,13 @@
 package com.example.imdb.core.service
 
+import com.example.imdb.common.Seminar400
+import com.example.imdb.core.api.request.LoginRequest
 import com.example.imdb.core.api.request.SignupRequest
 import com.example.imdb.core.database.UserRepository
 import com.example.imdb.core.domain.UserEntity
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
+import java.time.LocalDate
 
 @Service
 class AuthService(
@@ -19,6 +22,17 @@ class AuthService(
         userRepository.save(UserEntity.of(signupRequest, encodedPassword))
         return authTokenService.generateTokenByEmail(signupRequest.email)
 
+    }
+
+    fun login(loginRequest: LoginRequest) : AuthToken? {
+        val user = userRepository.findByEmail(loginRequest.email) ?: throw Seminar400("오류")
+        if (this.passwordEncoder.matches(loginRequest.password, user.password)) {
+            return authTokenService.generateTokenByEmail(loginRequest.email)
+
+
+        } else {
+            throw Seminar400("로그인 실패")
+        }
     }
 
 }

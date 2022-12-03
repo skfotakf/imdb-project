@@ -42,9 +42,16 @@ class AuthController(
     }
 
     @GetMapping("/login")
-    fun login(model: Model) : String{
+    fun loginForm(model: Model) : String{
+        model.addAttribute("error")
         model.addAttribute("loginRequest", LoginRequest("",""))
         return "auth/login"
+    }
+
+    @PostMapping("/login")
+    fun login(loginRequest: LoginRequest, bindingResult: BindingResult) : String? {
+        authService.login(loginRequest)
+        return "redirect:/chart/top"
     }
 
 

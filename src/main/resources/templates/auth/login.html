@@ -11,6 +11,7 @@
 </head>
 
 <body>
+<th:block page="../include/index_include/index_header.jsp"></th:block>
 <div id="root">
     <div class="content_box">
         <div id="login_option">
@@ -18,11 +19,11 @@
                 <h1>로그인</h1>
                 <form id="login-form" th:action="@{/auth/login}" th:object="${loginRequest}" method="post">
                     <div>
-                        <input type="text" class="item_ip" name="username" placeholder="ID">
+                        <input type="text" class="item_ip" th:field="*{email}" placeholder="ID">
                     </div>
 
                     <div>
-                        <input type="password" class="item_ip" name="password" placeholder="Password">
+                        <input type="password" class="item_ip" th:field="*{password}" placeholder="Password">
                     </div>
 
                     <div class="item_msg">
