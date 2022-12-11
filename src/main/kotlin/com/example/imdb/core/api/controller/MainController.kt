@@ -21,6 +21,7 @@ class MainController(
     @GetMapping("/top")
     fun chart(model: Model): String {
 
+        println("3")
         model.addAttribute("chartAllTop",movieService.getChartAll())
         return "chart/top"
 

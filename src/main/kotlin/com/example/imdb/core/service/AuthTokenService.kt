@@ -1,7 +1,7 @@
 package com.example.imdb.core.service
 
-import com.example.imdb.common.Seminar401
-import com.example.imdb.common.Seminar404
+import com.example.imdb.common.IMDb401
+import com.example.imdb.common.IMDb404
 import io.jsonwebtoken.*
 import io.jsonwebtoken.security.Keys
 import io.jsonwebtoken.security.SignatureException
@@ -62,9 +62,9 @@ class AuthTokenService(
             return Jwts.parserBuilder().setSigningKey(signingKey)
                     .build().parseClaimsJws(prefixRemoved)
         } catch (e: SignatureException) {
-            throw Seminar404("인증이 되지 않았습니다")
+            throw IMDb404("인증이 되지 않았습니다")
         } catch (e: ExpiredJwtException) {
-            throw Seminar401("인증이 되지 않았습니다")
+            throw IMDb401("인증이 되지 않았습니다")
         }
     }
 

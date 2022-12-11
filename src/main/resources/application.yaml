@@ -20,6 +20,10 @@ spring:
         show_sql: true
     hibernate:
       ddl-auto: update
+#  security:
+#    user:
+#      name: users
+#      password: 1111
 
 
 

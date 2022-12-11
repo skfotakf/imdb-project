@@ -18,8 +18,8 @@ class SeminarExceptionHandler {
     
  
 
-    @ExceptionHandler(value = [SeminarException::class])
-    fun handle(e: SeminarException): ResponseEntity<Any> {
+    @ExceptionHandler(value = [IMDbException::class])
+    fun handle(e: IMDbException): ResponseEntity<Any> {
         return ResponseEntity(e.message, e.status)
     }
 }
