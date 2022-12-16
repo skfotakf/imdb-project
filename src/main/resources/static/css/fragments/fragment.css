@@ -19,7 +19,7 @@ body{
     color: #fff;
 }
 
-.JMKYheader{
+.IMDbHeader{
     min-width: 1200px;
     width: 1280px;
     height: 56px;
@@ -29,12 +29,12 @@ body{
 
 
 
-.JMKYheader h1{
+.IMDbHeader h1{
     width: 59.67px;
     font-size: 25px;
 }
 
-.JMKYheader ul li{
+.IMDbHeader ul li{
     color: #fff;
     float: left;
     font-size:14px;
@@ -252,7 +252,7 @@ body{
     line-height: 48px;
 }
 
-#JMKY_footer_logo{
+#IMDb_footer_logo{
     margin: 16px;
     display: flex;
     color: #fff;
@@ -260,7 +260,7 @@ body{
     line-height: 40px;
 }
 
-#JMKY_footer_copy{
+#IMDb_footer_copy{
     margin: 6px 0;
     color: #fff;
     font-size: 6px;

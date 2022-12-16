@@ -23,7 +23,9 @@ class AuthService(
         }
         val encodedPassword = this.passwordEncoder.encode(signupRequest.password)
         userRepository.save(UserEntity.of(signupRequest, encodedPassword))
-        return authTokenService.generateTokenByEmail(signupRequest.email)
+        val token = authTokenService.generateTokenByEmail(signupRequest.email)
+        println(token)
+        return token
 
     }
 /*

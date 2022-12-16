@@ -2,7 +2,7 @@
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 
 plugins {
-	id("org.springframework.boot") version "3.0.0"
+	id("org.springframework.boot") version "2.7.0"
 	id("io.spring.dependency-management") version "1.1.0"
 	kotlin("jvm") version "1.7.21"
 	kotlin("plugin.spring") version "1.7.21"
@@ -22,12 +22,12 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 
 
 noArg {
-	annotation("jakarta.persistence.Entity")
+	annotation("javax.persistence.Entity")
 }
 
 allOpen {
-	annotation("jakarta.persistence.*")
-
+	annotation("javax.persistence.Entity")
+	annotation("javax.persistence.MappedSuperclass")
 }
 
 repositories {
@@ -43,12 +43,13 @@ dependencies {
 	implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-	runtimeOnly("com.mysql:mysql-connector-j")
+	runtimeOnly("mysql:mysql-connector-java")
 	testImplementation("org.springframework.boot:spring-boot-starter-test")
 
 	// thymeleaf
+
 	implementation("org.springframework.boot:spring-boot-starter-thymeleaf")
-	implementation("nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect")
+
 
 	// lombok
 	implementation("org.projectlombok:lombok")
@@ -56,6 +57,7 @@ dependencies {
 
 	// spring security
 	implementation("org.springframework.boot:spring-boot-starter-security")
+	implementation("org.thymeleaf.extras:thymeleaf-extras-springsecurity5")
 
 	// jwts token
 	implementation("io.jsonwebtoken:jjwt-api:0.11.5")

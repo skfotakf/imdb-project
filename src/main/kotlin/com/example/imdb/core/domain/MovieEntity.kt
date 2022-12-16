@@ -1,7 +1,7 @@
 package com.example.imdb.core.domain
 
 import com.example.imdb.common.BaseTimeEntity
-import jakarta.persistence.*
+import javax.persistence.*
 
 @Entity
 @Table(name="Movies")

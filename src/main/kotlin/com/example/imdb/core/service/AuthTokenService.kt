@@ -20,7 +20,7 @@ class AuthTokenService(
 
 ) {
     private val tokenPrefix = "Bearer "
-    private val signingKey = Keys.hmacShaKeyFor(authProperties.jwtSecret.toByteArray())
+    private val signingKey = Keys.hmacShaKeyFor("SEMINAR_SECRET_KEYfkrhsksmsakfgoTekdkfrpTsi".toByteArray())
 
     fun generateTokenByEmail(email: String) : AuthToken{
 

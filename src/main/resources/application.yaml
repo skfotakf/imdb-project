@@ -1,7 +1,4 @@
-auth.jwt:
-  jwtSecret: SEMINAR_SECRET_KEYfkrhsksmsakfgoTekdkfrpTsi
-  issuer: TEST
-  jwtExpiration: 86400
+
 
 
 server:
@@ -20,10 +17,7 @@ spring:
         show_sql: true
     hibernate:
       ddl-auto: update
-#  security:
-#    user:
-#      name: users
-#      password: 1111
+    open-in-view: false
 
 
 

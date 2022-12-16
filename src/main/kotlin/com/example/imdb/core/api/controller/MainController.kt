@@ -15,15 +15,21 @@ class MainController(
 ) {
     @GetMapping("/")
     fun indexRedirectHandler(): String {
-        return "redirect:top"
+        return "redirect:/top"
     }
 
     @GetMapping("/top")
     fun chart(model: Model): String {
-
-        println("3")
         model.addAttribute("chartAllTop",movieService.getChartAll())
         return "chart/top"
+
+    }
+
+    @GetMapping("/sec")
+    fun sec(): String {
+
+
+        return "chart/sec"
 
     }
 

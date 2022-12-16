@@ -1,5 +1,8 @@
+
+
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="utf-8">
     <script src="https://kit.fontawesome.com/45bf1b0ec8.js" crossorigin="anonymous"></script>
@@ -10,7 +13,10 @@
 </head>
 
 <body>
+
+
 <div class="container">
+    <th:block th:replace="~{fragments/header :: headerFragment}"></th:block>
     <div class="wrapper">
         <div class="pagecontent">
             <div class="content_2_wide">
@@ -32,6 +38,13 @@
                       </div>
                   </div>
               </span>
+
+                        <div sec:authorize="isAuthenticated()" >
+                            <p th:text="logout"></p>
+                        </div>
+                        <div sec:authorize="isAnonymous()">Login</div>
+
+
                     <table class="chart">
                         <thead class="chart_header">
                         <tr>
@@ -93,7 +106,9 @@
             </div>
         </div>
     </div>
+    <th:block th:replace="~{fragments/footer :: footerFragment}"></th:block>
 </div>
+
 
 </body>
 
@@ -309,7 +324,6 @@
     <script src="http://code.jquery.com/jquery-latest.min.js"></script>
 </head>
 <body>
- <jsp:include page="../include/index_include/index_header.html"></jsp:include>
 <div class="container">
 
 
@@ -593,7 +607,6 @@
             <div class="recently_viewed"></div>
         </div>
     </div>
-    <jsp:include page="../include/index_include/index_footer.html"></jsp:include>
 
 </div>
 <script type="text/javascript" src="/js/chart.js"></script>

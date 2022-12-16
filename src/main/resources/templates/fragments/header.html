@@ -1,11 +1,10 @@
+<!Doctype html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<th:block th:fragment="headerFragment">
 <link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
 <script src="/js/jquery-3.6.1.min.js"></script>
-<!--<script src="https://code.jquery.com/ui/1.13.1/jquery-ui.js"></script>-->
 
-<!--<sec:authorize access="isAuthenticated()">-->
-<!--	<sec:authentication property="principal" var="principal" />-->
-<!--</sec:authorize>-->
-<link rel="stylesheet" href="/css/index/index_include.css"/>
+<link rel="stylesheet" href="/css/fragments/fragment.css"/>
 <div id="menu_nav">
     <div id="menu_nav_top">
         <h1>
@@ -20,7 +19,7 @@
             <div class="menu_item">
                 <ul>
                     <li><a href="/chart/top">Top 10 차트</a></li>
-                    <li><a href="/chart/top/1/1">JMKY 전체 차트</a></li>
+                    <li><a href="/chart/top">IMDb 전체 차트</a></li>
                 </ul>
             </div>
         </div>
@@ -50,7 +49,7 @@
     </div>
 </div>
 <header id="header">
-    <div class="IMDbheader">
+    <div class="IMDbHeader">
 
         <h1>
             <a href="/chart/top" class="logo">IMDb</a>
@@ -62,6 +61,7 @@
                 <li class="icon"><i class="fas fa-list"></i> &nbsp;메뉴</li>
             </a>
         </ul>
+        <!--
         <div id="search_container1">
             <form id="search_container" method="get" action="/find">
                 <label> </label>
@@ -71,32 +71,51 @@
                     <i class="fas fa-search"></i>
                 </button>
             </form>
-        </div>
+        </div>-->
         <ul class="top_nav">
             <a href="https://pro.imdb.com/login/ap?u=/login/lwa&imdbPageAction=signUp&rf=cons_nb_hm&ref_=cons_nb_hm">
                 <li>IMDbPro</li>
             </a>
-            <a href="/user/likelist">
+            <a href="">
                 <li><i class="far fa-plus-square"></i> Likelist</li>
             </a>
-            <c:choose>
+
+
+                    <a sec:authorize="isAnonymous()" href="/auth/login"><li>로그인</li></a>
+
+
+
+                <div sec:authorize="isAuthenticated()">
+                    <a href="/auth/mypage" sec:authentication="name"><li class="ellipsis" >
+                        님</li></a>
+                    <div>
+                        <a href="/logout"><li><i class="fas fa-sign-out-alt"></i></li></a>
+                    </div>
+                </div>
+
+
+
+
+
+<!--
                 <c:when test="${empty principal.user }">
-                    <a href="/auth/signin">
+                    <a href="/auth/login">
                         <li>로그인</li>
                     </a>
                 </c:when>
 
                 <c:otherwise>
+                -->
 
                     <!--<a href="/auth/mypage"><li class="ellipsis">${principal.user.username }
                             님</li></a>
                     <div>
                         <a href="/logout"><li><i class="fas fa-sign-out-alt"></i></li></a>
                     </div>
-                    -->
-                </c:otherwise>
 
-            </c:choose>
+                </c:otherwise>-->
+
+
         </ul>
     </div>
 </header>
@@ -305,3 +324,5 @@
     });
 
 </script>
+</th:block>
+</html>

@@ -6,7 +6,7 @@ import com.example.imdb.core.database.UserRepository
 import com.example.imdb.core.service.AuthService
 import com.example.imdb.core.service.AuthToken
 import org.springframework.stereotype.Controller
-import jakarta.validation.Valid
+import javax.validation.Valid
 import org.springframework.ui.Model
 import org.springframework.validation.BindingResult
 import org.springframework.web.bind.annotation.*
@@ -53,20 +53,6 @@ class AuthController(
         println(loginRequest.email)
         return "auth/login"
     }
-
-    /*
-    @PostMapping("/login")
-    fun login(@Valid loginRequest: LoginRequest, bindingResult: BindingResult): String? {
-        println("2")
-        authService.login(loginRequest)
-        return "redirect:/chart/top"
-    }
-
-     */
-
-
-
-
 
 
 }

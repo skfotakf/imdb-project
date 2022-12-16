@@ -2,9 +2,9 @@ package com.example.imdb.core.domain
 
 import com.example.imdb.common.BaseTimeEntity
 import com.example.imdb.core.api.request.SignupRequest
-import jakarta.persistence.Column
-import jakarta.persistence.Entity
-import jakarta.persistence.Table
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.Table
 
 @Entity
 @Table(name = "Users")
